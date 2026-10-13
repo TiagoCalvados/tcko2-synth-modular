@@ -1,0 +1,10 @@
+/bin/
+/artifacts/
+*.exe
+*.pdb
+*.wav
+*.zip
+knob-mappings.txt
+last-error.txt
+verification*.txt
+.vs/
