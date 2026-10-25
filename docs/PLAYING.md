@@ -34,7 +34,7 @@ The eight dials control filter cutoff, resonance, oscillator drift/detuning, sat
 
 **SUSTAIN LATCH** acts like a sustain pedal you can leave on: play notes or chords, release the keys, and they stay held. **Bloom** raises softer sustain levels and adds fullness and space. Turn the latch off to release the notes with a natural fade. If a real MIDI sustain pedal is still down, those notes continue until you release the pedal too.
 
-**DRONE LATCH** holds each note continuously. Tap a key once to add it to your drone chord; tap the same key again to release it. It keeps a strong sustain level even with a short bell/keys preset. Turn the checkbox off to release the chord. Notes use their preset release time, so reverb and echo may fade afterwards. The shared mix supports sixteen held voices: for example eight layers with two notes each. New notes beyond capacity are refused while existing notes continue.
+**DRONE LATCH** holds each note continuously. Tap a key once to add it to your drone chord; tap the same key again to release it. It keeps a strong sustain level even with a short bell/keys preset. Turn the checkbox off to release the chord. Notes use their preset release time, so reverb and echo may fade afterwards. The shared mix supports 64 held voices: for example eight layers with eight notes each, or 31 layers with two notes each. New notes beyond capacity are refused while existing notes continue.
 
 The three presets labelled **/ Drone** switch Drone latch on automatically when selected. Start with C3 on the on-screen keyboard or a low Akai note. Add other notes, then shape Tone, Drift, Metal and Motion while they play. The two latch modes are alternatives: switching one on switches the other off. Intentionally latched notes continue if the app loses focus. Normal computer/mouse keys are released on focus loss.
 
@@ -82,3 +82,7 @@ See the repository [README](../README.md) for source build and test instructions
 ## Layered keyboard
 
 Choose several sounds across or within the upper selector, Sound Technologies and Old Electro. All kept sounds follow the same keys; new sounds join an existing held chord. Glitch and Fragments shape their combined waveform. LAYERS lists the full mix; select a layer and press Remove to drop only that sound. Reselecting a kept sound does not duplicate it. Technology Character/Volume and Old Electro Volume affect their selected layer. Master, pitch, Bloom, echo, sustain, Drone, Fade, Stop and Panic cover the mix. Saving preserves all layers and settings; reopening starts silently.
+
+## Choosing sounds in an existing full mix
+
+The desktop now holds the full 31-sound catalogue. A saved session with eight layers can add every Technology and Old Electro sound without deleting earlier choices. LAYERS shows the count. If a held chord fills the 64-voice budget, a new selection appears as [waiting] and joins automatically when enough keys are released. Panic clears notes and makes all chosen layers ready for the next keys.

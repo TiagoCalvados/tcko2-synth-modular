@@ -6,7 +6,7 @@ A small experimental Windows synthesizer for warm analogue-style tones, expansiv
 
 ## Download and play
 
-**v0.14.1:** Fixes the lower sound menus getting stuck during live refresh. **Open sound** is beside the title. It starts in your Projects/TCK02/SOUNDS folder, which can stay empty until you add recordings. WAV, M4A/AAC, MP3 and MP4 audio decode locally. Play sound and Stop sound control the imported file; master volume and global transport also apply. REC captures the combined file and synth performance. The synth keyboard/effect controls shape generated voices; the imported file plays its original audio alongside them.
+**v0.14.2:** Removes the eight-slot desktop bottleneck that made Technologies and Old Electro seem stuck in saved mixes. **Open sound** is beside the title. It starts in your Projects/TCK02/SOUNDS folder, which can stay empty until you add recordings. WAV, M4A/AAC, MP3 and MP4 audio decode locally. Play sound and Stop sound control the imported file; master volume and global transport also apply. REC captures the combined file and synth performance. The synth keyboard/effect controls shape generated voices; the imported file plays its original audio alongside them.
 
 The upper selector has eleven original sounds. All eight additional sounds remain in **Old Electro**. The browser counterpart is available on [Project Stories](https://project-stories-eta.vercel.app/tcko2.html), with the same header control and grouping. Browser format support depends on its decoders.
 
@@ -23,7 +23,7 @@ Choose a sound in the upper selector, Sound Technologies or Old Electro to add i
 
 Glitch and Fragments process the combined live sound. They have no separate fixed-note player. Use **LAYERS → Remove** to remove just one sound; the selected Technology or Old Electro layer also has an on/off switch and its own level. Sustain and Drone hold notes deliberately; normal note releases still work. Sessions restore the entire stack silently.
 
-The desktop supports eight layers and sixteen simultaneous held voices; the website supports eight layers on desktop or four on mobile (eight held voices on mobile). At capacity, an extra sound or note is refused with a message while the existing mix continues. Remove a layer or release notes to make room. The website's **Stack sounds** switch starts on; switching it off replaces only the selected layer when choosing a new sound.
+The Windows desktop has room for the complete catalogue: eleven original sounds, twelve Technologies and eight Old Electro sounds (31 layers), with a visible count. It shares 64 held voices, so all 31 sounds can follow two keys, or eight layers can follow eight keys. If a held chord already uses the voice budget, new sound selections stay selected as waiting layers and join automatically when enough keys are released. Earlier held sounds remain. Released voices may be retired to keep the render budget bounded; echo and reverb buffers remain. Rendering uses up to four CPU workers. The current browser version supports eight layers on desktop or four on mobile; extra layers or notes beyond its capacity are refused with a message. The website's **Stack sounds** switch starts on; switching it off replaces only the selected layer when choosing a new sound.
 
 ## Sounds and controls
 
@@ -32,7 +32,7 @@ The desktop supports eight layers and sixteen simultaneous held voices; the webs
 - **Sustain latch** holds released notes; **Drone latch** toggles individual held notes with repeated taps.
 - **Bloom** adds two extra detuned oscillators, stereo chorus, a fuller sustain level and long release.
 - **Echo Time** ranges from 0.08 to 4 seconds between repeats; Tape echo controls wet amount and feedback.
-- Velocity, sustain pedal and ±2-semitone pitch bend. Up to eight notes within a shared sixteen-voice mix budget (eight layers × two notes, or four layers × four notes).
+- Velocity, sustain pedal and ±2-semitone pitch bend. Up to eight notes within a shared 64-voice desktop mix budget (eight layers × eight notes, or 31 layers × two notes).
 
 Click **Learn** on a dial, then turn an Akai knob. The controller has four knobs and A/B banks for eight assignments. Mappings save beside the executable. Computer keys **A W S E D F T G Y H U J K O L P ;** play chromatically; **Z / X** change octave.
 
@@ -68,7 +68,7 @@ The v0.3.0 Windows build passed the full DSP, MIDI-message, UI and Windows audio
 
 ## Version
 
-**v0.14.1 — experimental prototype.** See [CHANGELOG](CHANGELOG.md).
+**v0.14.2 — experimental prototype.** See [CHANGELOG](CHANGELOG.md).
 
 ## Sound Technologies
 

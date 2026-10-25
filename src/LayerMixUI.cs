@@ -8,11 +8,12 @@ partial class MainForm {
     bool loadingLayers=true,syncingLayers;int layerVersion=-1;
     readonly ComboBox layerList=new Choice();readonly Button removeLayer=new Button();
     readonly CheckBox mixGlitch=new CheckBox(),mixElectro=new CheckBox();
+    Label layerCount;
     void InitializeLayerMix(TableLayoutPanel root){
         var holds=(Panel)root.GetControlFromPosition(0,3);
         glitchToggle.Visible=glitchControl.Visible=glitchTypeChoice.Visible=false;
         fragmentsToggle.SetBounds(350,2,110,26);fragmentsControl.SetBounds(460,0,100,32);
-        holds.Controls.Add(LabelAt("LAYERS",566,7,65,22,8,Theme.Mint));StyleCombo(layerList);layerList.Dock=DockStyle.None;layerList.SetBounds(631,0,203,30);layerList.DropDownWidth=420;layerList.AccessibleName="Sounds kept in the keyboard mix";holds.Controls.Add(layerList);
+        layerCount=LabelAt("LAYERS 1/31",566,7,65,22,7.5f,Theme.Mint);holds.Controls.Add(layerCount);StyleCombo(layerList);layerList.Dock=DockStyle.None;layerList.SetBounds(631,0,203,30);layerList.DropDownWidth=420;layerList.AccessibleName="Sounds kept in the keyboard mix";holds.Controls.Add(layerList);
         removeLayer.Text="Remove";StyleButton(removeLayer,Theme.Card);removeLayer.SetBounds(842,0,100,30);removeLayer.AccessibleName="Remove selected sound layer";holds.Controls.Add(removeLayer);
         layerList.SelectedIndexChanged+=delegate{if(!syncingLayers&&layerList.SelectedItem is SoundLayer)Rack.SelectLayer(((SoundLayer)layerList.SelectedItem).Id);};
         removeLayer.Click+=delegate{var selected=layerList.SelectedItem as SoundLayer;if(selected!=null){Rack.RemoveLayer(selected.Id);RefreshLayers();}};
@@ -29,7 +30,7 @@ partial class MainForm {
             technologyKeyboard.Checked=Rack.TechnologyLayer!=null&&Rack.TechnologyLayer.On;
             if(Rack.TechnologyLayer!=null){SyncLayerChoice(technologyChoice,Rack.TechnologyLayer.Index);technologyCharacter.Value=(int)Math.Round(Rack.TechnologyLayer.Character*100);technologyLevel.Value=(int)Math.Round(Rack.TechnologyLayer.Level*100);}
             if(Rack.ElectroLayer!=null){SyncLayerChoice(electroChoice,Rack.ElectroLayer.Index-11);electroLevel.Value=(int)Math.Round(Rack.ElectroLayer.Level*100);}
-            activity.Text=Rack.Message;
+            layerCount.Text="LAYERS "+Rack.Layers.Length+"/"+LayeredSynth.LayerLimit;activity.Text=Rack.Message;
         }finally{syncingLayers=false;}
     }
     static void SyncLayerChoice(ComboBox choice,int selected){if(!choice.DroppedDown&&choice.SelectedIndex!=selected)choice.SelectedIndex=selected;}

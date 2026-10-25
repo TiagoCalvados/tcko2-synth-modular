@@ -1,5 +1,12 @@
 # Changelog
 
+## v0.14.2
+
+- Fixes the second cause of apparently stuck Technology/Old Electro selectors: restored mixes could already occupy every one of the old eight slots, so new selections were rejected and the UI reverted.
+- Windows now holds the entire 31-sound catalogue and shows the layer count. Existing layers, mute states and sessions remain. Selected sounds over the held-voice budget wait and join automatically after key release instead of reverting the menu.
+- Shares 64 held voices and renders independent sources on up to four CPU workers before the common mix/effects/recording tap. Retires only released oscillator voices when needed to bound repeated-chord cost; downstream space/echo histories continue.
+- Verifies a restored eight-layer session through all Technology/Old Electro choices, full-catalogue chords, waiting selections, silent restoration, rapid chord changes, serial/parallel PCM equivalence and render headroom. The actual saved session is tested from a private local copy.
+
 ## v0.14.1
 
 - Fixes Glitch, Sound Technologies and Old Electro menus reverting to their current selection when clicking another item. Live refresh now leaves open dropdown menus alone and avoids rewriting unchanged selections.
