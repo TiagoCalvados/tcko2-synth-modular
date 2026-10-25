@@ -1,5 +1,10 @@
 # Changelog
 
+## v0.14.1
+
+- Fixes Glitch, Sound Technologies and Old Electro menus reverting to their current selection when clicking another item. Live refresh now leaves open dropdown menus alone and avoids rewriting unchanged selections.
+- Adds a native menu regression check that detects the original selection-reset messages, verifies every choice, and keeps earlier layers and held notes running. Layering and core DSP/MIDI/UI checks pass.
+
 ## v0.14.0
 
 - Main presets, Sound Technologies and Old Electro now build one keyboard mix. Earlier sounds remain even when another sound is selected in the same box; newly added sounds join held notes immediately.

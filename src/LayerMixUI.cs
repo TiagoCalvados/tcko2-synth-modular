@@ -19,16 +19,20 @@ partial class MainForm {
         loadingLayers=false;timer.Tick+=delegate{RefreshLayers();};RefreshLayers();
     }
     void RefreshLayers(){
+        // Native dropdowns keep their highlighted item separately until the click commits.
+        // Reapplying the committed index cancels that pending mouse selection.
+        if(layerList.DroppedDown||boxGlitchChoice.DroppedDown||technologyChoice.DroppedDown||electroChoice.DroppedDown)return;
         syncingLayers=true;
         try{
             if(layerVersion!=Rack.Version){var current=Rack.Current;layerList.BeginUpdate();layerList.Items.Clear();layerList.Items.AddRange(Rack.Layers);if(current!=null)layerList.SelectedItem=current;layerList.EndUpdate();layerVersion=Rack.Version;removeLayer.Enabled=layerList.Items.Count>0;effectHints.SetToolTip(layerList,Rack.Layers.Length+" / "+LayeredSynth.LayerLimit+" layers · "+String.Join(" + ",Rack.Layers.Select(x=>x.Name)));}
-            mixGlitch.Checked=Engine.GlitchMode;boxGlitchChoice.SelectedIndex=(int)Engine.SelectedGlitchType;boxGlitchLevel.Value=(int)Math.Round(Engine.GlitchAmount*100);mixElectro.Checked=Rack.ElectroLayer!=null&&Rack.ElectroLayer.On;
+            mixGlitch.Checked=Engine.GlitchMode;SyncLayerChoice(boxGlitchChoice,(int)Engine.SelectedGlitchType);boxGlitchLevel.Value=(int)Math.Round(Engine.GlitchAmount*100);mixElectro.Checked=Rack.ElectroLayer!=null&&Rack.ElectroLayer.On;
             technologyKeyboard.Checked=Rack.TechnologyLayer!=null&&Rack.TechnologyLayer.On;
-            if(Rack.TechnologyLayer!=null){technologyChoice.SelectedIndex=Rack.TechnologyLayer.Index;technologyCharacter.Value=(int)Math.Round(Rack.TechnologyLayer.Character*100);technologyLevel.Value=(int)Math.Round(Rack.TechnologyLayer.Level*100);}
-            if(Rack.ElectroLayer!=null){electroChoice.SelectedIndex=Rack.ElectroLayer.Index-11;electroLevel.Value=(int)Math.Round(Rack.ElectroLayer.Level*100);}
+            if(Rack.TechnologyLayer!=null){SyncLayerChoice(technologyChoice,Rack.TechnologyLayer.Index);technologyCharacter.Value=(int)Math.Round(Rack.TechnologyLayer.Character*100);technologyLevel.Value=(int)Math.Round(Rack.TechnologyLayer.Level*100);}
+            if(Rack.ElectroLayer!=null){SyncLayerChoice(electroChoice,Rack.ElectroLayer.Index-11);electroLevel.Value=(int)Math.Round(Rack.ElectroLayer.Level*100);}
             activity.Text=Rack.Message;
         }finally{syncingLayers=false;}
     }
+    static void SyncLayerChoice(ComboBox choice,int selected){if(!choice.DroppedDown&&choice.SelectedIndex!=selected)choice.SelectedIndex=selected;}
     Control SoundSection(bool glitch){
         var choice=glitch?boxGlitchChoice:electroChoice;var toggle=glitch?mixGlitch:mixElectro;var level=glitch?boxGlitchLevel:electroLevel;
         var box=new GroupBox{Text=glitch?"GLITCH · MIX EFFECT":"OLD ELECTRO · ADD LAYERS",Dock=DockStyle.Fill,ForeColor=glitch?Theme.Mint:Theme.Copper,Padding=new Padding(8),Margin=new Padding(glitch?0:6,0,glitch?6:0,0)};

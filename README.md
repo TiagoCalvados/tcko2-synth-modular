@@ -6,7 +6,7 @@ A small experimental Windows synthesizer for warm analogue-style tones, expansiv
 
 ## Download and play
 
-**v0.14.0:** **Open sound** is beside the title. It starts in your Projects/TCK02/SOUNDS folder, which can stay empty until you add recordings. WAV, M4A/AAC, MP3 and MP4 audio decode locally. Play sound and Stop sound control the imported file; master volume and global transport also apply. REC captures the combined file and synth performance. The synth keyboard/effect controls shape generated voices; the imported file plays its original audio alongside them.
+**v0.14.1:** Fixes the lower sound menus getting stuck during live refresh. **Open sound** is beside the title. It starts in your Projects/TCK02/SOUNDS folder, which can stay empty until you add recordings. WAV, M4A/AAC, MP3 and MP4 audio decode locally. Play sound and Stop sound control the imported file; master volume and global transport also apply. REC captures the combined file and synth performance. The synth keyboard/effect controls shape generated voices; the imported file plays its original audio alongside them.
 
 The upper selector has eleven original sounds. All eight additional sounds remain in **Old Electro**. The browser counterpart is available on [Project Stories](https://project-stories-eta.vercel.app/tcko2.html), with the same header control and grouping. Browser format support depends on its decoders.
 
@@ -68,7 +68,7 @@ The v0.3.0 Windows build passed the full DSP, MIDI-message, UI and Windows audio
 
 ## Version
 
-**v0.14.0 — experimental prototype.** See [CHANGELOG](CHANGELOG.md).
+**v0.14.1 — experimental prototype.** See [CHANGELOG](CHANGELOG.md).
 
 ## Sound Technologies
 
