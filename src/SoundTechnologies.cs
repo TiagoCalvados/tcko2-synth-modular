@@ -14,12 +14,12 @@ sealed class TechnologyVoice {
     double rate,frequency,phase=0,time=0,seed=123456789,gain=0,fade=1,fadeStep=0;
     double low=0,previous=0,slip=0,walk=0,burst=0,nextEvent=0;
     int cursor=0,pluckLength=100,grainSlot=0,tableStart=0;
-    double[] source=new double[2048],frozen=new double[16384],tableA=new double[16384],tableB=new double[16384];
+    double[] source,frozen,tableA,tableB;
     double[] pluck=new double[4096],history=new double[256],impulse=new double[128];
     double[] mode1=new double[8],mode2=new double[8],modeC=new double[8],modeR=new double[8];
     double[] ages=new double[16],lengths=new double[16],starts=new double[16],speeds=new double[16],pans=new double[16],osc=new double[16];
     double[] ratios=new double[]{1,1.593,2.135,2.917,3.598,4.421,5.713,7.271};
-    public TechnologyVoice(double sampleRate){rate=sampleRate;if(TechnologyTables.Source==null){Prepare();TechnologyTables.Source=source;TechnologyTables.Frozen=frozen;TechnologyTables.A=tableA;TechnologyTables.B=tableB;}else{source=TechnologyTables.Source;frozen=TechnologyTables.Frozen;tableA=TechnologyTables.A;tableB=TechnologyTables.B;}Reset();}
+    public TechnologyVoice(double sampleRate){rate=sampleRate;if(TechnologyTables.Source==null){source=new double[2048];frozen=new double[16384];tableA=new double[16384];tableB=new double[16384];Prepare();TechnologyTables.Source=source;TechnologyTables.Frozen=frozen;TechnologyTables.A=tableA;TechnologyTables.B=tableB;}else{source=TechnologyTables.Source;frozen=TechnologyTables.Frozen;tableA=TechnologyTables.A;tableB=TechnologyTables.B;}Reset();}
     double Random(){seed=(seed*1664525+1013904223)%4294967296.0;return seed/4294967296.0;}
     double Noise(){return Random()*2-1;}
     int Index(double value){return (int)value;}

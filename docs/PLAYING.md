@@ -28,17 +28,17 @@ For a DJ mixer setup: **Akai USB → Windows PC → PC headphone/line output (or
 | Soot Ribbon Lead | A gritty lead with filter movement and tape echo. |
 | Arcade Vapour | Hollow, shimmering keys with a glassy ring-modulation edge. |
 
-The eight dials control filter cutoff, resonance, oscillator drift/detuning, saturation, tape-style echo amount/feedback, reverb amount/decay, ring modulation amount/ratio, and LFO movement. Drag up/down, use the mouse wheel, or focus a dial and use arrow keys. Parameters glide to reduce abrupt changes. Preset changes clear held notes and effect tails.
+The eight dials control filter cutoff, resonance, oscillator drift/detuning, saturation, tape-style echo amount/feedback, reverb amount/decay, ring modulation amount/ratio, and LFO movement. Drag up/down, use the mouse wheel, or focus a dial and use arrow keys. Parameters glide to reduce abrupt changes. Choosing another sound adds a layer and keeps held notes and effect tails in earlier layers. Use LAYERS to select or remove a sound.
 
 ## Sustain and drone
 
 **SUSTAIN LATCH** acts like a sustain pedal you can leave on: play notes or chords, release the keys, and they stay held. **Bloom** raises softer sustain levels and adds fullness and space. Turn the latch off to release the notes with a natural fade. If a real MIDI sustain pedal is still down, those notes continue until you release the pedal too.
 
-**DRONE LATCH** holds each note continuously. Tap a key once to add it to your drone chord; tap the same key again to release it. It keeps a strong sustain level even with a short bell/keys preset. Turn the checkbox off to release the chord. Notes use their preset release time, so reverb and echo may fade afterwards. It supports up to eight voices; adding a ninth replaces the oldest.
+**DRONE LATCH** holds each note continuously. Tap a key once to add it to your drone chord; tap the same key again to release it. It keeps a strong sustain level even with a short bell/keys preset. Turn the checkbox off to release the chord. Notes use their preset release time, so reverb and echo may fade afterwards. The shared mix supports sixteen held voices: for example eight layers with two notes each. New notes beyond capacity are refused while existing notes continue.
 
 The three presets labelled **/ Drone** switch Drone latch on automatically when selected. Start with C3 on the on-screen keyboard or a low Akai note. Add other notes, then shape Tone, Drift, Metal and Motion while they play. The two latch modes are alternatives: switching one on switches the other off. Intentionally latched notes continue if the app loses focus. Normal computer/mouse keys are released on focus loss.
 
-**PANIC / Esc** and **STOP** clear every note, both latch modes, and all effect tails. Changing a preset also clears the old notes; only a dedicated drone preset enables its Drone latch again. The app starts with both latches off and no note playing.
+**PANIC / Esc** and **STOP** clear every note, both latch modes, and all effect tails. Choosing another preset keeps earlier sounds and notes. A dedicated drone preset enables Drone latch. Panic and Stop retain the configured sound layers. The app starts with both latches off and no note playing.
 
 ## Bloom and long echo
 
@@ -46,7 +46,7 @@ The three presets labelled **/ Drone** switch Drone latch on automatically when 
 
 **ECHO TIME** controls the spacing of repeats from **0.08 to 4.00 seconds**. **Tape echo** remains the amount/feedback dial: raise it for more repeats and a much longer tail. Changing time glides the delay, producing tape-like pitch movement. The stereo repeats cross-feed with slightly different left/right timing. Reverb now has larger delay chambers and a longer decay too.
 
-For a spacious starting point, select **Lunar Array / Drone** (90% Bloom, 2.2-second echo spacing) or **Rust Cathedral / Drone**, tap a low note and a fifth, and shape Tone slowly. Lower Tape echo or Room for a clearer sound. Panic clears even the long tails immediately apart from the short Windows output buffer.
+For a spacious starting point, select **Lunar Array / Drone** and raise Bloom and Echo Time or **Rust Cathedral / Drone**, tap a low note and a fifth, and shape Tone slowly. Lower Tape echo or Room for a clearer sound. Panic clears even the long tails immediately apart from the short Windows output buffer.
 
 ## Teach the Akai knobs
 
@@ -78,3 +78,7 @@ See the repository [README](../README.md) for source build and test instructions
 
 - [Akai Play mk3 manual](https://cdn.inmusicbrands.com/akai/mpk-mini-play-mk3/MPK%20mini%20Play%20mk3%20-%20User%20Guide%20-%20v1.1.pdf): USB setup, Internal Sounds and knob banks.
 - [Microsoft MIDI input](https://learn.microsoft.com/en-us/windows/win32/api/mmeapi/nf-mmeapi-midiinopen) and [Windows audio output](https://learn.microsoft.com/en-us/windows/win32/api/mmeapi/nf-mmeapi-waveoutopen): native device interfaces.
+
+## Layered keyboard
+
+Choose several sounds across or within the upper selector, Sound Technologies and Old Electro. All kept sounds follow the same keys; new sounds join an existing held chord. Glitch and Fragments shape their combined waveform. LAYERS lists the full mix; select a layer and press Remove to drop only that sound. Reselecting a kept sound does not duplicate it. Technology Character/Volume and Old Electro Volume affect their selected layer. Master, pitch, Bloom, echo, sustain, Drone, Fade, Stop and Panic cover the mix. Saving preserves all layers and settings; reopening starts silently.

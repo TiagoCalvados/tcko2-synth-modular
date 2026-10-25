@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.IO;
 using System.Text;
 using System.Linq;
@@ -13,13 +13,13 @@ partial class MainForm {
   Control center=technologyChoice.Parent.Parent;TableLayoutPanel row=(TableLayoutPanel)center.Parent;if(row.GetColumn(center)!=1||row.GetColumn(boxGlitchChoice.Parent.Parent)!=0||row.GetColumn(electroChoice.Parent.Parent)!=2)throw new Exception("Box order");
   var handle=Handle;var bounds=Bounds;boxes.Play(false,true);boxes.Play(true,true);
   for(int type=0;type<12;type++){
-   Engine.Panic();technologyChoice.SelectedIndex=type;UseTechnology();Engine.Render(pcm,256);if(pcm.Any(x=>x!=0))throw new Exception("Selection must be silent");
+   Rack.ResetLayers(0);Engine.Panic();technologyChoice.SelectedIndex=type;UseTechnology();Engine.Render(pcm,256);if(pcm.Any(x=>x!=0))throw new Exception("Selection must be silent");
    piano.Press(48);Engine.Render(pcm,256);if(pcm.All(x=>x==0)||!Engine.IsNote(48))throw new Exception("Screen key must play technology "+type);piano.Release(48);Engine.Panic();
    KeyPressed(this,new KeyEventArgs(Keys.A));Engine.Render(pcm,256);if(pcm.All(x=>x==0))throw new Exception("Computer key must play");KeyReleased(this,new KeyEventArgs(Keys.A));Engine.Panic();heldKeys.Clear();
    Router.Handle(0x90|(60<<8)|(100<<16));Router.Handle(0x90|(64<<8)|(100<<16));for(int blocks=0;blocks<12;blocks++)Engine.Render(pcm,256);if(!Engine.IsNote(60)||!Engine.IsNote(64)||pcm.All(x=>x==0))throw new Exception("MIDI chord must play "+type+" notes "+Engine.IsNote(60)+","+Engine.IsNote(64)+" peak "+Engine.Peak);Router.Handle(0x80|(60<<8));if(Engine.IsNote(60)||!Engine.IsNote(64))throw new Exception("Independent note release");Engine.Panic();
    if(!boxes.Glitch.IsNote(60)||!boxes.Electro.IsNote(60)||Handle!=handle||Bounds!=bounds)throw new Exception("Other sources or window changed");
   }
-  technologyChoice.SelectedIndex=5;technologyCharacter.Value=71;technologyLevel.Value=42;SaveSession();technologyChoice.SelectedIndex=0;LoadSession();Engine.Render(pcm,256);if(Engine.TechnologyType!=5||technologyCharacter.Value!=71||technologyLevel.Value!=42||pcm.Any(x=>x!=0))throw new Exception("Restore must retain selected keyboard sound silently");
+  Rack.ResetLayers(0);technologyChoice.SelectedIndex=5;UseTechnology();technologyCharacter.Value=71;technologyLevel.Value=42;SaveSession();technologyChoice.SelectedIndex=0;LoadSession();Engine.Render(pcm,256);if(Engine.TechnologyType!=5||technologyCharacter.Value!=71||technologyLevel.Value!=42||pcm.Any(x=>x!=0))throw new Exception("Restore must retain selected keyboard sound silently");
   ToggleStop();piano.Press(48);Engine.Render(pcm,256);if(pcm.Any(x=>x!=0))throw new Exception("Global Stop");ToggleStop();Panic();
   using(var shot=new Bitmap(Width,Height)){DrawToBitmap(shot,new Rectangle(Point.Empty,shot.Size));shot.Save(Path.Combine(folder,"technologies-desktop.png"));}
   report.AppendLine("PASS: ordered boxes, silent selection, on-screen/computer/MIDI keys, chords, note-off, independent boxes, stable window, silent settings restore, Stop and Panic");

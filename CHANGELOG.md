@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.14.0
+
+- Main presets, Sound Technologies and Old Electro now build one keyboard mix. Earlier sounds remain even when another sound is selected in the same box; newly added sounds join held notes immediately.
+- Glitch and Fragments process the actual combined waveform. Removes independent fixed-note Glitch/Old Electro transport controls.
+- Adds a Layers selector and Remove, per-selected Technology/Old Electro mute and level, and complete silent stack restoration.
+- Supports eight layers within a shared sixteen-voice held-note budget. Extra layers/notes are refused without replacing existing sounds. Uses short gain ramps and shared prepared technology tables.
+- Tests shared computer/on-screen/MIDI input, chords, sustain, removal, recording, mix effects, session settings, master, fade and render capacity. Matching Project Stories version adds visible removable layers and mobile capacity handling.
+
 ## v0.13.2
 
 - Adds Sound Technologies between smaller Glitch and Old Electro boxes, with twelve original procedural keyboard instruments, short names, descriptions, Character and Volume.
